@@ -10,7 +10,7 @@ exports.handler = async event => {
     const { name } = event.queryStringParameters
 
     console.log(event.queryStringParameters)
-    axios.get('https://eo6bf1fgja8meug.m.pipedream.net/', {
+    const req = await axios.get('https://eo6bf1fgja8meug.m.pipedream.net/', {
         params: {
             name: name || 'RDV 1',
             description: "mon evenment",
@@ -18,6 +18,7 @@ exports.handler = async event => {
             end: "2022-12-14T11:00:00-00:00"
         }
     })
+    console.log({ req })
     return {
         statusCode: 200,
         body: `Hello TOm le pd`,
