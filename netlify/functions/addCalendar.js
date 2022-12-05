@@ -6,21 +6,25 @@
 // of your site. Netlify Functions will handle the rest for you.
 const axios = require('axios')
 
+// exemple http://localhost:3000/.netlify/functions/server/addCalendar?name=rdv&description=une%20description&start=2023-01-01T10:00:00&end=2023-01-01T11:00:00
+
+// Working Date 2022-12-14T10:00:00-00:00
 exports.handler = async event => {
-    const { name } = event.queryStringParameters
+    const { name, description, start, end } = event.queryStringParameters
+
 
     console.log(event.queryStringParameters)
     const req = await axios.get('https://eo6bf1fgja8meug.m.pipedream.net/', {
         params: {
             name: name || 'RDV 1',
-            description: "mon evenment",
-            start: "2022-12-14T10:00:00-00:00",
-            end: "2022-12-14T11:00:00-00:00"
+            description: description || "Pas de description pour ce RDV",
+            start: start + "-00:00",
+            end: end + "-00:00"
         }
     })
     console.log({ req })
     return {
         statusCode: 200,
-        body: `Hello TOm le pd`,
+        body: `Hello Tom le pd`,
     }
 }
