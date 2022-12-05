@@ -7,10 +7,12 @@
 const axios = require('axios')
 
 exports.handler = async event => {
+    const { name } = event.queryStringParameters
 
+    console.log(event.queryStringParameters)
     axios.get('https://eo6bf1fgja8meug.m.pipedream.net/', {
         params: {
-            name: "RDV",
+            name: name || 'RDV 1',
             description: "mon evenment",
             start: "2022-12-14T10:00:00-00:00",
             end: "2022-12-14T11:00:00-00:00"
